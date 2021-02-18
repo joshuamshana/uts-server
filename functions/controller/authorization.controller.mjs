@@ -8,7 +8,7 @@ export class AuthorizationController {
      * @param keyPair {*}
      * @return {*}
      */
-    getToken(keyPair, host = 'https://utsserver-faas.bfast.fahamutech.com') {
+    getToken(keyPair, host = 'https://buspoa-faas.bfast.fahamutech.com') {
         const time = Math.floor(new Date().getTime() / 1000);
         const claims = {
             iss: host,
