@@ -63,7 +63,7 @@ export const push = bfast.functions().onJob(
                    x.class = x.class.toString().replace('Luxuly', 'Luxury').trim();
                    return x;
                });
-               console.log(journeys[0])
+               // console.log(journeys[0])
                 if (journeys && Array.isArray(journeys) && journeys.length > 0 && validateJourneyList(journeys)) {
                     const hash = CryptoService.hash(journeys);
                      const isSent = await jobService.isJobSent(hash)
