@@ -1,6 +1,6 @@
 import bfastnode from "bfastnode";
 import moment from "moment";
-import {RandomUtil} from "../utils/random.util.js";
+import {RandomUtil} from "../utils/random.util.mjs";
 
 const {bfast} = bfastnode;
 
