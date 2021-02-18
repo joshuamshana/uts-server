@@ -1,9 +1,13 @@
 import bfastnode from "bfastnode";
 import {JourneyService} from "../services/journey.service.mjs";
+import {CryptoService} from "../services/crypto.service.mjs";
+import {JobService} from "../services/job.service.mjs";
 
 const {bfast, BFast} = bfastnode;
 const journeyService = new JourneyService();
+const jobService = new JobService();
 const ndicUrl = "http://41.59.225.242/.well-known/tz-uts-server";
+const busPoaJourneysApi = "https://buspoa.co.tz/manifest/utsrequest.php";
 
 function validateJourneyList(body) {
     return (
@@ -51,16 +55,18 @@ export const push = bfast.functions().onJob(
                 }
             })
             .then(async data => { // get journeys
-                const busPoaJourneysApi = "https://buspoa.co.tz/manifest/utsrequest.php";
-                const journeys = await bfast.functions().request(busPoaJourneysApi).get()
-                console.log(journeys)
+
+                let journeys = await bfast.functions().request(busPoaJourneysApi).get();
+
                 if (journeys && Array.isArray(journeys) && journeys.length > 0 && validateJourneyList(journeys)) {
                     const hash = CryptoService.hash(journeys);
                     const isSent = await jobService.isJobSent(hash)
+                    console.log(isSent)
                     if (isSent === true) {
                         throw {message: 'journeys already sent'};
                     } else {
                         return {
+                            hash,
                             journeys,
                             ...data
                         }
@@ -70,11 +76,19 @@ export const push = bfast.functions().onJob(
                 }
             })
             .then(async (data) => {  // send journeys to NDIC
-                console.log(data)
-                // return bfast.functions().request(ndicUrl).post(
-                //     data["journeys"],
-                // );
+                const result = await bfast.functions().request(ndicUrl).post(
+                    data["journeys"],
+                );
+                return {
+                    result,
+                    ...data
+                }
             })
-            .then(console.log)
+            .then(data => {
+                return jobService.registerJob({
+                    id: data.hash,
+                    date: new Date()
+                })
+            })
             .catch(console.warn)
     });
