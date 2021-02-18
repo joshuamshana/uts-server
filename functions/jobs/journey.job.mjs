@@ -47,7 +47,7 @@ function validateJourneyList(body) {
 }
 
 export const push = bfast.functions().onJob(
-    {second: "*/30"},
+    {second: "0"},
     _ => {
         bfast.functions().request(ndicUrl).get()  // get credentials from NDIC
             .then(creds => {
@@ -68,7 +68,7 @@ export const push = bfast.functions().onJob(
                     const hash = CryptoService.hash(journeys);
                      const isSent = await jobService.isJobSent(hash)
                     // console.log(isSent);
-                    if (isSent) {
+                    if (false) {
                         throw {message: 'journeys already sent'};
                     } else {
                         return {
