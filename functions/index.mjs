@@ -1,6 +1,14 @@
-// const {BFast} = require('bfastnode');
+import bfastnode from "bfastnode";
+const {bfast, BFast} = bfastnode;
+
+bfast.init({
+    applicationId: "utsserver",
+    projectId: "utsserver",
+    appPassword: "utsserver2020",
+});
+
 //
-// exports.helloWorld = BFast.functions().onHttpRequest('/hello', (request, response) => {
+// export const helloWorld = BFast.functions().onHttpRequest('/hello', (request, response) => {
 //     // your logic
 //     response.send("Hello from BFast!");
 // });
