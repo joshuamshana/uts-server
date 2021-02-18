@@ -26,3 +26,4 @@ bfast.init({
 // exports.sampleJob = BFast.functions().onJob({second: '*/3'}, _ => {
 //     console.log(" I am a job running every 3 second");
 // });
+
