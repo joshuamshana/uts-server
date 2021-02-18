@@ -1,5 +1,4 @@
 import bfastnode from "bfastnode";
-import {RandomUtil} from "../utils/random.util.js";
 import moment from "moment";
 
 const {bfast} = bfastnode;

@@ -1,5 +1,5 @@
-import {v4} from "uuid";
-
-export const RandomUtil = {
-    uuid: v4()
-}
+// import {v4} from "uuid";
+//
+// export const RandomUtil = {
+//     uuid: v4()
+// }
