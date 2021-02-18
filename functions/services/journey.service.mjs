@@ -1,5 +1,6 @@
 import bfastnode from "bfastnode";
 import moment from "moment";
+import {RandomUtil} from "../utils/random.util.js";
 
 const {bfast} = bfastnode;
 
@@ -31,6 +32,7 @@ export class JourneyService {
     async reserveJourney(reserve) {
         if (this._validateReserveData(reserve)) {
             // todo: implement reserve from bus poa
+            console.log(reserve);
             return {
                 "type": "mock",
                 "reservation_id": reserve.reservation_request_id,
