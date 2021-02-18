@@ -193,9 +193,9 @@ export const push = bfast.functions().onJob(
                // let journeys = await bfast.functions().request(busPoaJourneysApi).get();
                 if (journeys && Array.isArray(journeys) && journeys.length > 0 && validateJourneyList(journeys)) {
                     const hash = CryptoService.hash(journeys);
-                    const isSent = await jobService.isJobSent(hash)
-                    console.log(isSent);
-                    if (isSent === true) {
+                    // const isSent = await jobService.isJobSent(hash)
+                   //  console.log(isSent);
+                    if (false) {
                         throw {message: 'journeys already sent'};
                     } else {
                         return {
