@@ -59,10 +59,15 @@ export const push = bfast.functions().onJob(
             .then(async data => { // get journeys
 
                let journeys = await bfast.functions().request(busPoaJourneysApi).get();
+               journeys = journeys.map(x=>{
+                   x.class = x.class.toString().replace('Luxuly', 'Luxury').trim();
+                   return x;
+               });
+               console.log(journeys[0])
                 if (journeys && Array.isArray(journeys) && journeys.length > 0 && validateJourneyList(journeys)) {
                     const hash = CryptoService.hash(journeys);
                      const isSent = await jobService.isJobSent(hash)
-                   //  console.log(isSent);
+                    // console.log(isSent);
                     if (isSent) {
                         throw {message: 'journeys already sent'};
                     } else {
@@ -77,7 +82,7 @@ export const push = bfast.functions().onJob(
                 }
             })
             .then(async (data) => {
-                const result = await bfast.functions().request(ndicUrl).post(
+                const result = await bfast.functions().request(data.url).post(
                     data["journeys"],
                     {
                         headers: {
@@ -97,5 +102,7 @@ export const push = bfast.functions().onJob(
                     date: new Date()
                 })
             })
-            .catch(console.warn)
+            .catch(reason => {
+                console.log(reason && reason.response?reason.response.data: reason);
+            })
     });
