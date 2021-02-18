@@ -5,7 +5,8 @@
     "test": "echo \"no test\""
   },
   "dependencies": {
-    "bfastnode": "^4.0.8"
+    "bfastnode": "^4.0.8",
+    "moment": "^2.29.1"
   },
   "devDependencies": {},
   "private": true

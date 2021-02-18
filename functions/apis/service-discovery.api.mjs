@@ -7,7 +7,7 @@ export const serviceDiscoveryApi = BFast.functions().onHttpRequest('/.well-known
         reserve_endpoint_url: `${hostPath}/journey/reserve`,
         jwks_uri: `${hostPath}/jwks`,
         vendor_name: `BUS POA`
-    }
+    };
 
     response.json(result);
 });
