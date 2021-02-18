@@ -1,8 +1,8 @@
-// import bfastnode from "bfastnode";
-// import {JourneyService} from "../services/journey.service.mjs";
-//
-// const {bfast, BFast} = bfastnode;
-// const journeyService = new JourneyService();
+import bfastnode from "bfastnode";
+import {JourneyService} from "../services/journey.service.mjs";
+
+const {bfast, BFast} = bfastnode;
+const journeyService = new JourneyService();
 //
 // function validateJourneyList(body) {
 //     return (

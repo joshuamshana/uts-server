@@ -4,7 +4,7 @@ const {bfast, BFast} = bfastnode;
 export const serviceDiscoveryApi = BFast.functions().onHttpRequest('/.well-known/tz-e-ticketing-server', (request, response) => {
     const hostPath = "https" + '://' + request.get('host') ;
     const result = {
-        reserve_endpoint_url: `${hostPath}/journey/reserve`,
+        reserve_endpoint_url: `${hostPath}/reserve`,
         jwks_uri: `${hostPath}/jwks`,
         vendor_name: `BUS POA`
     };
