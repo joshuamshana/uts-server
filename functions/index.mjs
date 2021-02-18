@@ -2,9 +2,9 @@ import bfastnode from "bfastnode";
 const {bfast, BFast} = bfastnode;
 
 bfast.init({
-    applicationId: "utsserver",
-    projectId: "utsserver",
-    appPassword: "utsserver2020",
+    applicationId: "buspoa",
+    projectId: "buspoa",
+    appPassword: "buspoa2020",
 });
 
 //

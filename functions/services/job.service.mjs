@@ -27,29 +27,7 @@ export class JobService {
         }
     }
 
-    /**
-     *
-     * @param _job {
-     *     {
-                id: string,
-                date: string,
-            }
-     * }
-     * @return {Promise<*>}
-     */
-    async isDailySalesJobExecuted(_job) {
-        try {
-            const job = await BFast.database().collection('jobs').get(_job.id);
-            if (job && job.date) {
-                const diff = moment(_job.date).diff(moment(job.date));
-                return diff === 0;
-            } else {
-                return false
-            }
-        } catch (e) {
-            return false;
-        }
-    }
+
 
     async isJobSent(hash) {
         try {
