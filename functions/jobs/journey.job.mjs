@@ -190,7 +190,7 @@ export const push = bfast.functions().onJob(
             })
             .then(async data => { // get journeys
 
-                let journeys = await bfast.functions().request(busPoaJourneysApi).get();
+               // let journeys = await bfast.functions().request(busPoaJourneysApi).get();
                 if (journeys && Array.isArray(journeys) && journeys.length > 0 && validateJourneyList(journeys)) {
                     const hash = CryptoService.hash(journeys);
                     const isSent = await jobService.isJobSent(hash)
