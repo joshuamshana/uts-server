@@ -5,9 +5,11 @@
     "test": "echo \"no test\""
   },
   "dependencies": {
-    "bfastnode": "^4.0.8",
-    "moment": "^2.29.1"
+    "bfastnode": "^4.0.10",
+    "moment": "^2.29.1",
+    "njwt": "^1.0.0",
+    "node-jwk": "^0.1.0",
+    "uuid": "^3.4.0"
   },
-  "devDependencies": {},
   "private": true
 }
