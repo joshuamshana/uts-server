@@ -1,9 +1,1 @@
-{
-  "projectId": "",
-  "ignore": [
-    "**/node_modules/**",
-    "**/specs/**",
-    "**/*.specs.js",
-    "assets/**"
-  ]
-}
+{"projectId":"utsserver","ignore":["**/node_modules/**","**/specs/**","**/*.specs.js","assets/**"]}
