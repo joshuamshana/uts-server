@@ -67,8 +67,8 @@ export class JobService {
                 });
                 if (journeys && Array.isArray(journeys) && journeys.length > 0 && validateJourneyList(journeys)) {
                     const hash = CryptoService.hash(journeys);
-                    const isSent = await this.isJobSent(hash)
-                    if (isSent) {
+                  //  const isSent = await this.isJobSent(hash)
+                    if (false) {
                         throw {message: 'journeys already sent'};
                     } else {
                         return {
