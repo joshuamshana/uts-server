@@ -29,7 +29,9 @@ export class JourneyService {
         console.log(reserve);
         if (this._validateReserveData(reserve)) {
             const results = await bfast.functions().request(busPoaUrlReserve).post(reserve);
-            results.expires = results.expires ? results.expires.toString().replace(new RegExp('(:Z)', 'ig'), 'Z') : null
+            if (results.expires) {
+                results.expires = results.expires.toString().replace(new RegExp('(:Z)', 'ig'), 'Z')
+            }
             console.log(results);
             return results;
             // return {
