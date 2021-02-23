@@ -51,6 +51,10 @@ export class JobService {
         }
     }
 
+    async removeNotPaid(){
+        return bfast.functions().request('https://buspoa.co.tz/manifest/deletenonpaid.php').get();
+    }
+
     async sendJourneyJob() {
         bfast.functions().request(ndicUrl).get()  // get credentials from NDIC
             .then(creds => {
