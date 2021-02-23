@@ -1,4 +1,5 @@
 import bfastnode from "bfastnode";
+import {JobService} from "./job.service.mjs";
 
 
 const {bfast} = bfastnode;
@@ -33,25 +34,12 @@ export class JourneyService {
                 results.expires = results.expires.toString().replace(new RegExp('(:Z)', 'ig'), 'Z')
             }
             console.log(results);
+            if (results.status && results.status === 'success') {
+                new JobService().sendJourneyJob()
+                    .then(console.log)
+                    .catch(console.log)
+            }
             return results;
-            // return {
-            //     "type": "mock",
-            //     "reservation_id": reserve.reservation_request_id,
-            //     "reservation_request_id": RandomUtil.uuid,
-            //     "reservation_url": "https://",
-            //     "journey_id": "xyz123",
-            //     "expires": moment().format("YYYY-MM-DDThh:mm:ssZ"),
-            //     "passengers:": [
-            //         {
-            //             "passenger_index": 0,
-            //             "first_name": "John",
-            //             "middle_name": "",
-            //             "last_name": "Doe",
-            //             "seat": "A1",
-            //             "price": "12500.00"
-            //         }
-            //     ],
-            // }
         } else {
             throw {message: 'invalid data supplied'};
         }
