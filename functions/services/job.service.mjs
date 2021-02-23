@@ -96,7 +96,7 @@ export class JobService {
                 }
             })
             .then(data => {
-                console.log(data.result);
+                console.log(data.result, '*********uts*********');
                 return this.registerJob({
                     id: data.hash,
                     date: new Date()
