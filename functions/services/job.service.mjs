@@ -59,18 +59,15 @@ export class JobService {
                     jwks_uri: creds["jwks_uri"]
                 }
             })
-            .then(async data => { // get journeys
-
+            .then(async data => {
                 let journeys = await bfast.functions().request(busPoaJourneysApi).get();
                 journeys = journeys.map(x => {
                     x.class = x.class.toString().replace('Luxuly', 'Luxury').trim();
                     return x;
                 });
-                // console.log(journeys[0])
                 if (journeys && Array.isArray(journeys) && journeys.length > 0 && validateJourneyList(journeys)) {
                     const hash = CryptoService.hash(journeys);
                     const isSent = await this.isJobSent(hash)
-                    // console.log(isSent);
                     if (isSent) {
                         throw {message: 'journeys already sent'};
                     } else {
