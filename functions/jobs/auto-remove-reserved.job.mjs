@@ -4,11 +4,11 @@ import {JobService} from "../services/job.service.mjs";
 const {bfast} = bfastnode;
 
 export const removeNotPaidJourneyJob = bfast.functions().onJob(
-    {second: "*/5"},
+    {second: "*/30"},
     _ => {
         new JobService().removeNotPaid()
             .then(value => {
-                console.log(value, '***********not paid*********');
+                console.log(value);
             })
             .catch(reason => {
                 console.log('fails to remove expired journeys')
