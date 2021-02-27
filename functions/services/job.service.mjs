@@ -21,11 +21,10 @@ function validateJourneyList(body) {
 export class JobService {
     /**
      *
-     * @param job {{date: Date, id: string}}
+     * @param job {{date: Date, id: string, hash: string}}
      * @return {Promise<*>}
      */
     async registerJob(job) {
-        // console.log(job);
         let _job = null;
         try {
             _job = await bfast.database().table('jobs').get(job.id);
@@ -36,22 +35,29 @@ export class JobService {
             return bfast.database().collection('jobs').query().byId(job.id)
                 .updateBuilder()
                 .set('date', job.date)
+                .set('hash', job.hash)
                 .update();
         } else {
             return bfast.database().collection('jobs').save(job);
         }
     }
 
-    async isJobSent(hash) {
+    /**
+     *
+     * @param id {string}
+     * @param hash {string}
+     * @return {Promise<boolean>}
+     */
+    async isJobSent({id,hash}) {
         try {
-            const job = await bfast.database().collection('jobs').get(hash);
-            return !!(job && job.date);
+            const job = await bfast.database().collection('jobs').get(id);
+            return  (job && job.hash && job.hash === hash);
         } catch (e) {
             return false;
         }
     }
 
-    async removeNotPaid(){
+    async removeNotPaid() {
         return bfast.functions().request('https://buspoa.co.tz/manifest/deletenonpaid.php').get();
     }
 
@@ -70,9 +76,10 @@ export class JobService {
                     return x;
                 });
                 journeys = journeys.filter(x => x && x.seats && Array.isArray(x.seats) && x.seats.length > 0);
+                // console.log(journeys);
                 if (journeys && Array.isArray(journeys) && journeys.length > 0 && validateJourneyList(journeys)) {
                     const hash = CryptoService.hash(journeys);
-                     const isSent = await this.isJobSent(hash)
+                    const isSent = await this.isJobSent({id: 'journey_job', hash: hash});
                     if (isSent) {
                         throw {message: 'journeys already sent'};
                     } else {
@@ -103,7 +110,8 @@ export class JobService {
             .then(data => {
                 console.log(data.result, '*********uts*********');
                 return this.registerJob({
-                    id: data.hash,
+                    id: 'journey_job',
+                    hash: data.hash,
                     date: new Date()
                 })
             })
