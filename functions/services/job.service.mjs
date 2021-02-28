@@ -3,7 +3,7 @@ import {CryptoService} from "./crypto.service.mjs";
 import {AuthorizationController} from "../controller/authorization.controller.mjs";
 import {SecretsUtil} from "../utils/secrets.util.mjs";
 
-const ndicUrl = "http://41.59.225.242/.well-known/tz-uts-server";
+const ndicUrl = "https://uts.tiketimtandao.co.tz/.well-known/tz-uts-server";
 const busPoaJourneysApi = "https://buspoa.co.tz/manifest/utsrequest.php";
 const {BFast, bfast} = bfastnode;
 
