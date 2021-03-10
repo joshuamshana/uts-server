@@ -4,7 +4,7 @@ import {JobService} from "../services/job.service.mjs";
 const {bfast} = bfastnode;
 
 export const pushJourneyJob = bfast.functions().onJob(
-    {second: "*/30"},
+    {second: "0"},
     _ => {
         new JobService().sendJourneyJob()
             .then(console.log)
